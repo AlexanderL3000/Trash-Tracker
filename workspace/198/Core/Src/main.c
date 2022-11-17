@@ -21,7 +21,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <string.h>
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -59,6 +60,10 @@ void usDelay(uint32_t uSec);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+const float speedOfSound = 0.0343/2;
+float distance;
+
+char uartBuf[100];
 /* USER CODE END 0 */
 
 /**
@@ -68,7 +73,7 @@ void usDelay(uint32_t uSec);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+  uint32_t numTicks;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -100,7 +105,34 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+	  HAL_GPIO_TogglePin (GPIOA, GPIO_PIN_5);
 
+	  //Set TRIG to LOW for a few uSec
+	  HAL_GPIO_WritePin(TRIG_GPIO_Port, TRIG_Pin, GPIO_PIN_RESET);
+	  usDelay(3);
+
+	  //Use TRIG
+	  HAL_GPIO_WritePin(TRIG_GPIO_Port, TRIG_Pin, GPIO_PIN_SET);
+	  usDelay(10);
+	  HAL_GPIO_WritePin(TRIG_GPIO_Port, TRIG_Pin, GPIO_PIN_RESET);
+
+	  //Measure Echo Signal
+	  while(HAL_GPIO_ReadPin(ECHO_GPIO_Port, ECHO_Pin) == GPIO_PIN_RESET);
+
+	  numTicks = 0;
+	  while(HAL_GPIO_ReadPin(ECHO_GPIO_Port, ECHO_Pin) == GPIO_PIN_SET)
+	  {
+		  numTicks++;
+		  usDelay(2); // 2.8 usec
+	  }
+
+	  distance = (numTicks + 0.0f) * 2.8 * speedOfSound;
+
+	  sprintf(uartBuf, "Distance (cm) = %d\r\n", (int)(distance));
+
+	  HAL_UART_Transmit(&huart2, (uint8_t *)uartBuf, strlen(uartBuf), 100);
+
+	  HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
