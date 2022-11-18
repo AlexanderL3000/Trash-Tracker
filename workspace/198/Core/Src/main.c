@@ -23,6 +23,8 @@
 /* USER CODE BEGIN Includes */
 #include <string.h>
 #include <stdio.h>
+#include "liquidcrystal_i2c.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -97,6 +99,11 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
+
+  HD44780_Init(2);
+  	HD44780_Clear();
+  	HD44780_SetCursor(0, 0);
+  	HD44780_PrintStr("Hello World");
 
   /* USER CODE END 2 */
 
