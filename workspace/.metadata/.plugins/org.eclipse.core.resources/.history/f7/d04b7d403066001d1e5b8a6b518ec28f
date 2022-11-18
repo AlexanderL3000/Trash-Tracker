@@ -23,8 +23,6 @@
 /* USER CODE BEGIN Includes */
 #include <string.h>
 #include <stdio.h>
-#include "liquidcrystal_i2c.h"
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -65,7 +63,6 @@ void usDelay(uint32_t uSec);
 const float speedOfSound = 0.0343/2;
 float distance;
 
-char uartBuf[100];
 /* USER CODE END 0 */
 
 /**
@@ -99,11 +96,6 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
-
-  HD44780_Init(2);
-  	HD44780_Clear();
-  	HD44780_SetCursor(0, 0);
-  	HD44780_PrintStr("Hello World");
 
   /* USER CODE END 2 */
 
