@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="BEGIN PTD"/>
+		<item key="selection" value="uSec"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="usec"/>
+			<item value="usart"/>
+			<item value="usar"/>
+			<item value="usa"/>
+			<item value="us"/>
+			<item value="extern"/>
 			<item value="begin ptd"/>
 			<item value="begin 4"/>
 		</list>

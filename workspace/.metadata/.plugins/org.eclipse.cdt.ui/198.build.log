@@ -1,10 +1,27 @@
-23:32:33 **** Incremental Build of configuration Debug for project 198 ****
+15:56:31 **** Incremental Build of configuration Debug for project 198 ****
 make -j8 all 
-arm-none-eabi-size   198.elf 
-   text	   data	    bss	    dec	    hex	filename
-  14588	    120	   1832	  16540	   409c	198.elf
-Finished building: default.size.stdout
- 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:106:4: warning: implicit declaration of function 'MX_TIM4_Init'; did you mean 'MX_TIM3_Init'? [-Wimplicit-function-declaration]
+  106 |    MX_TIM4_Init();
+      |    ^~~~~~~~~~~~
+      |    MX_TIM3_Init
+../Core/Src/main.c:156:5: warning: implicit declaration of function 'itoa' [-Wimplicit-function-declaration]
+  156 |     itoa(iDist, sDist, 10);
+      |     ^~~~
+../Core/Src/main.c:164:28: error: 'base' undeclared (first use in this function)
+  164 |     int occSpace = iDist * base;
+      |                            ^~~~
+../Core/Src/main.c:164:28: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:165:25: error: 'height' undeclared (first use in this function)
+  165 |     int maxVol = base * height;
+      |                         ^~~~~~
+At top level:
+../Core/Src/main.c:278:13: warning: 'MX_TIM3_Init' defined but not used [-Wunused-function]
+  278 | static void MX_TIM3_Init(void)
+      |             ^~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:37: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
 
-23:32:33 Build Finished. 0 errors, 0 warnings. (took 168ms)
+15:56:31 Build Failed. 3 errors, 3 warnings. (took 288ms)
 
